@@ -6,10 +6,14 @@ int main(){
   // c = getchar();
   printf("Enter your input: ");
   scanf("%d",&c);
+
+  space_char(c);
 }
 
 int space_char(char c){
-
+  if(c == ' '){
+    return true;
+  }
 
 
 }//end space_char
