@@ -9,7 +9,7 @@ int main(){
 
   space_char(c);
 }
-
+//
 int space_char(char c){
   if(c == ' '){
     return true;
