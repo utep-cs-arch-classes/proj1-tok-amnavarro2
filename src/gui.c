@@ -9,7 +9,7 @@ int main(){
   char c;
   char str[LIMIT];
   // char *ptr;
-  char *first_word;
+  //char *first_word;
   
   int is_space = 0;
   int is_non_space = 0;
@@ -24,6 +24,7 @@ int main(){
     
     is_space = space_char(c);
     is_non_space = non_space_char(c);
+    
     printf("\tis white space %d\n",is_space);
     printf("\tis non-white space %d\n", is_non_space);
     
@@ -36,11 +37,11 @@ int main(){
 
   char *ptr = str;
   
-  //int len =sizeof(ptr);
-  //  printf("%d\n", len);
-  // *word_start(ptr);
-  amount_words = count_words(ptr);
-  printf("%d\n", amount_words);
+  
+ char* first_word = word_start(ptr);
+  printf("The first word is: %s\n",first_word);
+  // amount_words = count_words(ptr);
+  // printf("%d\n", amount_words);
 }//end main
 
 
@@ -63,21 +64,21 @@ int non_space_char(char c){
 
 
 char *word_start(char *str){
-  int i=0;
-  int length = sizeof(str)/sizeof(char);
-  printf("%d\n ",length);
-
-  while(*str != ' '){
-    // printf("%s","enters");
-
-    if(*str== ' '){
-      printf("%c ", *str);
-    }
-    *(str+1);
-  }//end for loop
+  int i;
+  char word[100];
+  int count =0;
+  char *first = word;
   
-  // printf("%s  ",str); //check if the ptr works
-
+  for(i = 0; *(str+i) != '\0'; i++){
+    if(*(str+i) == ' '){
+      printf("first word is %s\n", word);
+      return first;
+    }
+    
+    word[i] = *(str+i);
+    
+  }//end for loop
+  return first;
 }//end word_start
 
 int count_words(char *str){
