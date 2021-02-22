@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include "tokenizer.h"
 #define LIMIT 100
 
@@ -6,10 +7,14 @@
 
 int main(){
   char c;
-  char s[LIMIT];
+  char str[LIMIT];
+  // char *ptr;
+  char *first_word;
+  
   int is_space = 0;
   int is_non_space = 0;
   int i = 0;
+  int amount_words = 0;
 
   
   printf("ENTER YOUR INPUT: \n");
@@ -22,23 +27,20 @@ int main(){
     printf("\tis white space %d\n",is_space);
     printf("\tis non-white space %d\n", is_non_space);
     
-    //s[i] = c; //making a string of chars
-    //i++; //index for the string of chars
+    str[i] = c; //making a string of chars
+    i++; //index for the string of chars
   }//end while
-
+  str[i]='\0';
   
-  // printf("YOUR INPUT IS: %s\n",s);
-  // is_space = space_char(c);
-  // printf("is there a white space? %d\n", is_space);
-  // is_non_space = non_space_char(c);
-  // printf("is there a non-white space? %d\n",is_non_space);
-  
-  // Original Idea with scanner SCRAP!
-  // printf("Enter your input: ");
-  // scanf("%d",&c);
+  printf("YOUR INPUT IS: %s\n",str);//print out the input as a string of characters.
 
-  // space_char(c);
-  // non_space_char(c);
+  char *ptr = str;
+  
+  //int len =sizeof(ptr);
+  //  printf("%d\n", len);
+  // *word_start(ptr);
+  amount_words = count_words(ptr);
+  printf("%d\n", amount_words);
 }//end main
 
 
@@ -58,3 +60,34 @@ int non_space_char(char c){
   else
     return 0; //returns false
 }//end non_space_char
+
+
+char *word_start(char *str){
+  int i=0;
+  int length = sizeof(str)/sizeof(char);
+  printf("%d\n ",length);
+
+  while(*str != ' '){
+    // printf("%s","enters");
+
+    if(*str== ' '){
+      printf("%c ", *str);
+    }
+    *(str+1);
+  }//end for loop
+  
+  // printf("%s  ",str); //check if the ptr works
+
+}//end word_start
+
+int count_words(char *str){
+  int i; 
+  int count = 1; //Assuming we will have one word atleast
+  
+  for(i = 0; *(str+i)!='\0';i++){
+    if(*(str+i) == ' '){ //Every time there's a space then we will count the spaces and get the amount of words from there
+	count++;
+      }
+    }
+  return count;
+}//end count_words
