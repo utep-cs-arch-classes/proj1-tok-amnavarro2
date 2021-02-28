@@ -10,6 +10,7 @@ int main(){
   char str[LIMIT];
   //char *ptr;
   char *first_word;
+  char *last_word;
 
   
   int is_space = 0;
@@ -40,6 +41,9 @@ int main(){
   
   first_word = word_start(ptr);
   printf("The first word is: %c\n",first_word);
+
+  last_word = word_end(ptr);
+  printf("The last word is: %c\n", last_word);
   // amount_words = count_words(ptr);
   // printf("%d\n", amount_words);
 }//end main
@@ -77,13 +81,18 @@ char *word_start(char *str){
   }//end for loop
 }//end word_start
 
-//char *word_end(char *str){
+char *word_end(char *str){
+  int i = 0;
+  
+  for(i =0; *(str+i) != '\0'; i++){
+      if(*(str+i+1) == '\0'){
+	
+	// printf("next letter is %c\n",*(str+i));
+      return *(str+i);
+      }//end if
+  }//end for loop
+}//end word_end
 
-
-
-
-
-//}//end word start
 int count_words(char *str){
   int i; 
   int count = 1; //Assuming we will have one word atleast
@@ -95,3 +104,8 @@ int count_words(char *str){
     }
   return count;
 }//end count_words
+
+
+void free_tokens(char **tokens){
+  free(tokens);
+}//end free_tokens
