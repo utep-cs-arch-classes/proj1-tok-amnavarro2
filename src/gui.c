@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "tokenizer.h"
 #define LIMIT 100
@@ -11,7 +12,7 @@ int main(){
   //char *ptr;
   char *first_word;
   char *last_word;
-
+  char *copy;
   
   int is_space = 0;
   int is_non_space = 0;
@@ -46,6 +47,9 @@ int main(){
   printf("The last word is: %c\n", last_word);
   // amount_words = count_words(ptr);
   // printf("%d\n", amount_words);
+
+  copy = copy_str(ptr,2);
+  printf("The copy string is: %s\n", copy);
 }//end main
 
 
@@ -76,10 +80,9 @@ char *word_start(char *str){
        // printf("first word is %c\n", *str);
        return *(str+i);
      }
-     
-     
   }//end for loop
 }//end word_start
+
 
 char *word_end(char *str){
   int i = 0;
@@ -93,19 +96,36 @@ char *word_end(char *str){
   }//end for loop
 }//end word_end
 
+
 int count_words(char *str){
   int i; 
   int count = 1; //Assuming we will have one word atleast
   
   for(i = 0; *(str+i)!='\0';i++){
     if(*(str+i) == ' '){ //Every time there's a space then we will count the spaces and get the amount of words from there
-	count++;
+
+       count++;
       }
-    }
+  }//end for
   return count;
 }//end count_words
 
 
-void free_tokens(char **tokens){
-  free(tokens);
-}//end free_tokens
+char *copy_str(char *inStr, short len){
+  int i=0;
+  char *copy ="";
+  copy = (char *)malloc(len);
+
+  for(i = 0; i <= len; i++){
+    *(copy+i) = *(inStr+i);
+    //printf("the copy char is %c\n", *(copy+i));
+  }
+  //printf("The  final copy is %s\n", copy);
+
+  return copy;
+
+}//end copy_str
+
+//void free_tokens(char **tokens){
+  //free(tokens);
+//}//end free_tokens
