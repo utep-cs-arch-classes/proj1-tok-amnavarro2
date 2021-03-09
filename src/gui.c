@@ -3,8 +3,9 @@
 
 #include "tokenizer.h"
 #define LIMIT 100
-
-
+int find_space(char *ptr);
+int word_start_index(char *ptr);
+int word_end_index(char *ptr);
 
 int main(){
   char c;
@@ -48,17 +49,19 @@ int main(){
 
   // printf("the string is: %s\n", inStr);
   
-  first_word = word_start(ptr);
+  first_word = word_start(ptr2);
   printf("The first word is: %c\n",first_word);
 
-  last_word = word_end(ptr);
+  last_word = word_end(ptr2);
   printf("The last word is: %c\n", last_word);
   // amount_words = count_words(ptr);
   // printf("%d\n", amount_words);
 
-  copy = copy_str(ptr,2);
+  copy = copy_str(ptr2,2);
   printf("The copy string is: %s\n", copy);
-
+  //char *test;
+  //test = entire_word(ptr2);
+  //printf("the entire word is %s\n", test);
   tokenize(ptr2);
   //for(j = 0; **(tokens + j) !="\0", j++){
     //printf("the token is %s\n", tokens[j]);
@@ -141,51 +144,105 @@ char *copy_str(char *inStr, short len){
 
 }//end copy_str
 
+int word_start_index(char *str){
+  int i=0;
+  for(i =0; *(str +i) !='\0';i++){
+    if(*(str+i) != ' '){
+    return i;
+   }
+  }//end for loop
 
-char **tokenize(char* str){
+}//end word_start_index
+
+int word_end_index(char *str){
+  int i =0;
+  for(i =0; *(str + i) != '\0'; i++){
+    if(*(str + i + 1) == '\0'){
+      return i;
+    }//end if
+  }
+}//end method
+int find_space(char *str){
   int i = 0;
-  int idx = 0;
-  short distance = 0;
+  for(i = 0; *(str + i) != '\0'; i++){
+    if(*(str +i) == ' '){
+      //return *(str+i);
+
+      return i;
+    }
+    
+  }//end for loop
+}//end entire_word
+
+char **tokenize(char *str){
+  int i = 0;
+  int start = 0;
+  int end;
+  int space_index = 0;
+  int length = 0;
+  int count = 0;
   int pos = 0;
-  int amount_chars = 0;
-  int count_tokens = 0;
-  char *newStr;
+  char *curr;
+  char *ptr;
   char **tokens;
-  int size_holder[idx];
-  count_tokens = count_words(str);
-  int j = 0;;
 
+  curr = str;
+  tokens = (char **)malloc(sizeof(char*) *4);//trying to allocate memory for the double pointer
   
-  //this it to find the indexs of spaces between words.
-   for(i = 0; *(str + i) != '\0'; i++){
-     if(*(str+i) == ' '){
-       pos = i;
-       size_holder[idx] = pos;
-       //printf("array where the spaces where found: %d\n ",size_holder[idx]);
-       idx++;
-     }//end if
-     amount_chars++;
-   }//end for loop
-   amount_chars = amount_chars -1;
-
-
-
-
-   //this loop is to calcutate the distance of a word to create a copy of str in order to tokenize it
-   for (j = 0; j <idx; j++){
-     //printf("value at index %d, %d\n", j, size_holder[j]);
-    distance = (amount_chars - size_holder[j])-1;
-    newStr = copy_str(str, distance);
-   }//end for loop
+  for(i= 0; *(str+i)!='\0'; i++){
+    if(*(str+i) == ' '){ //this if statement will tokenize the first word once the first space is found
+      
+      start = word_start_index(curr);
+      space_index = find_space(curr);
+      length = space_index - start;
    
-   //newStr = copy_str(str, distance);
-   printf("The new str is %s\n", newStr);
+      ptr= copy_str(curr, length);
+      //printf("the new token is: %s\n", ptr);
+      *(tokens+count) = ptr;
+      count++;
+   }//end if
+
+    //WIP this is supposed to tokenize whats in the middle of the string.
+    //if(*(str +i) == ' ' && *(str+i+1) != ' '){
+      //pos = i - length;
+      //space_index = find_space(curr);
+      //space_index=+1;
+      //end = word_end_index(curr);
+      //length = end - space_index+1;
+      //printf("the len is: %d\n", end);
+
+      //ptr = copy_str(curr+pos, length);
+      //printf("the middle token is %s\n", ptr);
+      //*(tokens+count) = ptr;
+      //count++;
+    //}//end if
+    
+
+
 
 
     
-  printf("size of str in words %d\n",count_tokens);
-  tokens = (char**) malloc(sizeof(char*)*(count_tokens+1));//the size of the tokenizer
-  
+    if(*(str+i+1) == '\0'){//this if statement will tokenize once it finds that the next postition is a null space.
+      
+      pos = i -length;// get the starting position of the index after the current space
+      end = word_end_index(curr);//gets the final index of the string
+      length = end - pos;
+     
+      
+      ptr = copy_str(str+pos+1, length);
+      //printf("the token on 2nd if is: %c\n", ptr);
+      *(tokens+count) = ptr;
+      count++;
+    }//end if
+   }//end for loop
+
+  //prints the tokens, DO NOT TOUCH!
+  int j = 0;
+  // *(tokens+99) = '\0';
+  while(*(tokens+j) != "\0"){
+    printf("the tokens are: %s\n",*(tokens+j));
+    j++;
+  }
 }//end tokenize
 
 
