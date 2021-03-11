@@ -2,7 +2,12 @@
 #include <stdlib.h>
 
 #include "tokenizer.h"
+#include "history.h"
+#include "history.c"
+
 #define LIMIT 100
+
+//custom helper methods for my code
 int find_space(char *ptr);
 int word_start_index(char *ptr);
 int word_end_index(char *ptr);
@@ -10,7 +15,6 @@ int word_end_index(char *ptr);
 int main(){
   char c;
   char str[LIMIT];
-  // char str2 = "";
   char *first_word;
   char *last_word;
   char *copy;
@@ -44,11 +48,9 @@ int main(){
   str[i]='\0';
   printf("YOUR INPUT IS: %s\n",str);//print out the input as a string of characters.
 
-  char *ptr = str;
+  // char *ptr = str;
   char *ptr2 =inStr;
 
-  // printf("the string is: %s\n", inStr);
-  
   first_word = word_start(ptr2);
   printf("The first word is: %c\n",first_word);
 
@@ -59,14 +61,13 @@ int main(){
 
   copy = copy_str(ptr2,2);
   printf("The copy string is: %s\n", copy);
-  //char *test;
-  //test = entire_word(ptr2);
-  //printf("the entire word is %s\n", test);
   tokenize(ptr2);
-  //for(j = 0; **(tokens + j) !="\0", j++){
-    //printf("the token is %s\n", tokens[j]);
-    // }//end while
-  
+
+  //history calls
+  List *LL = init_history();
+  add_history(LL,ptr2);
+  print_history(LL);
+
 }//end main
 
 
@@ -162,6 +163,7 @@ int word_end_index(char *str){
     }//end if
   }
 }//end method
+
 int find_space(char *str){
   int i = 0;
   for(i = 0; *(str + i) != '\0'; i++){
@@ -174,6 +176,7 @@ int find_space(char *str){
   }//end for loop
 }//end entire_word
 
+
 char **tokenize(char *str){
   int i = 0;
   int start = 0;
@@ -182,12 +185,14 @@ char **tokenize(char *str){
   int length = 0;
   int count = 0;
   int pos = 0;
+  int num_words=0;
   char *curr;
   char *ptr;
   char **tokens;
 
+  num_words = count_words(str);
   curr = str;
-  tokens = (char **)malloc(sizeof(char*) *4);//trying to allocate memory for the double pointer
+  tokens = (char **)malloc(sizeof(char*)*num_words);//trying to allocate memory for the double pointer
   
   for(i= 0; *(str+i)!='\0'; i++){
     if(*(str+i) == ' '){ //this if statement will tokenize the first word once the first space is found
@@ -238,14 +243,14 @@ char **tokenize(char *str){
 
   //prints the tokens, DO NOT TOUCH!
   int j = 0;
-  // *(tokens+99) = '\0';
-  while(*(tokens+j) != "\0"){
+  while(*(tokens+j) != '\0'){
     printf("the tokens are: %s\n",*(tokens+j));
     j++;
   }
+  
 }//end tokenize
 
 
-//void free_tokens(char **tokens){
-  //free(tokens);
-//}//end free_tokens
+void free_tokens(char **tokens){
+  free(tokens);
+}//end free_tokens
