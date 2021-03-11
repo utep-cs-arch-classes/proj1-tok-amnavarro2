@@ -65,9 +65,16 @@ int main(){
 
   //history calls
   List *LL = init_history();
+
   add_history(LL,ptr2);
   print_history(LL);
+  
+  char *hist = get_history(LL, 1);
+  printf("the word is: %s\n", hist);
 
+  free_list(LL);
+  printf("the list is now: %s\n", LL);
+  
 }//end main
 
 
