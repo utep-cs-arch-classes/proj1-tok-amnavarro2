@@ -3,19 +3,19 @@
 #include "history.h"
 
 
-//int main(){
-//List *list = init_history();
-// add_history(list, "hello");
-// add_history(list, "world");
-//add_history(list, "are you good");
+int main(){
+List *list = init_history();
+ add_history(list, "hello");
+ add_history(list, "world");
+ add_history(list, "are you good");
   
-//print_history(list);
+print_history(list);
 
-//char *hist = get_history(list, 1);
-//printf("the word is: %s\n",hist);
+char *hist = get_history(list, 1);
+printf("the word is: %s\n",hist);
 
-//free_history(list);
-//printf("the list is: %s\n",list);
+free_history(list);
+printf("the list is: %s\n",list);
 }//end main
 
 
@@ -53,10 +53,12 @@ void add_history(List *list, char *str){
     count++;
   }//end while
 
-  temp->next = malloc(sizeof(Item));//allocate memory for the next node in the list.
+  count = count + 1;
   
-  temp->next->id = count+1;//indicate the next value of id.
-  temp->next->str = str; //insert the str in the next node.
+  temp->next = malloc(sizeof(Item));//allocate memory for the next node in the list.
+
+  temp->next->str=str; //indicate the next str in the next node.
+  temp->next->id = count;//indicate the next value of id.
   temp->next->next = NULL;//make the next-next node null, but in this case it would be the last position.
 }//end add_history
 
