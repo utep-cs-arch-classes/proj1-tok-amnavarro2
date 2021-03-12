@@ -121,12 +121,88 @@ by subtracting both values and send the length to the copy_str along with the
 index we want to start in our pointer. After we do the same as before and
 store the copy in the double pointer.
 
-# free_tokens:
+# free_tokens method:
 
 For this piece of code, I needed to free all the tokens allocated in the
 double pointer. so what I did was essentially use the free command which will
 de-allocate all of our tokens making it unuseable for the future.
 
 
+# History File:
+
+For the history file I would depend on using a Linked List which my knowledge
+of it depends on my CS3 and arch course. But to begin we will depend on these
+methods...
+
+- init_history
+- add_history
+- print_history
+- get_history
+- free_history
+
+# init_history method:
+
+The purpose of this method is to essentially work as our constructor, so what
+we have to do to begin is to create an empty list then allocate space for it
+by its object data type, which the same would apply for item which is a
+different type than the list.
+
+Now with that done we need to declare our variables. So the list at the root
+(head) will store the item. The item's id(node position) will be declared as
+zero. The items string will be declared as an empty string for now. Then the
+next item node will be NULL since we have yet to store anything inside of
+it. Now the constructor is fully functional and we can make our Linked list.
 
 
+# add_history method:
+
+In this method we want to add a collection of data into our linked list, so to
+do so based on programming principles, we always save our linked list's head
+in a copy of it so we don't lose the original. After we want to make an
+integer that will work as our id(position) for our nodes.
+
+To start creating our linked list I first wanted to check if our list was
+empty, so to do that I wanted to check the id of the node and if it was equals
+to zero then we would have to populate its string and index which the first id
+will be 1 instead of zero due to me not wanting to override our first item
+every time we called the method.I tried to check if our root was null but
+since we needed to populate the nodes,I wasn't allowed access to it since its
+a different type (tried to replicate list.head == NULL in java to c).
+
+After we populated the first position, I then made a while loop to traverse
+the Linked list until we found the next node that was Null. If the next node
+was not null, then we would shift to the next node and increment our
+node_pos. When we find the next node that is null then we proceed out the
+loop and succesfully traversed to the last node we have.
+
+outside the loop we would increment our current node_pos by 1 and then
+allocate new memory for 1 new node in the next position. With an empty node
+allocated we store our str inside the next node then the new position in it
+which would represent it as our id. We have now made it possible to add an
+item in our list, however we still need to declare the position after our next
+as null since we require the while loop to traverse our list.
+
+# print_history method:
+
+For this method all I had to do was to print the entire content of each node
+which inlcudes the id and the str only. To start off, make a copy of the head
+to keep it safe then traverse the list until we get to the Null node. Each
+time we traverse we print the id and the str then shift on to the next node
+available.
+
+
+# get_history method:
+
+This method whats us to return the node that is in a specific index so if I
+had "hello world" and the index given to me is 1 then I would return hello
+since I start at 1. As always keep the head safe and traverse the list till we
+reach a null position, in the loop we want to compare id's so if our current
+id is the same as the one given to us then we return the str. If not then we
+shift to the next node to check if we have one of the same id. If the id given
+to us does not exist in the list then we return NULL.
+
+# free_history method:
+
+Its almost the same as free tokens, but here we are trying to deallocate our
+existing list which will not be usable anymore. So what I did was to use the
+free command once more.
