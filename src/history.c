@@ -3,21 +3,21 @@
 #include "history.h"
 
 
-//int main(){
-//List *list = init_history();
+int main(){
+List *list = init_history();
 
-//add_history(list, "hello");
-//add_history(list, "world");
-//add_history(list, "are you good");
+add_history(list, "hello");
+add_history(list, "world");
+add_history(list, "are you good");
 
-//print_history(list);
+print_history(list);
 
   //char *hist = get_history(list, 1);
   //printf("the word is: %s\n", hist);
 
   //free_history(list);
   //printf("the list is: %s\n", list); 
-//}//end main
+}//end main
 
 List *init_history(){
   List *list = NULL;
@@ -48,7 +48,7 @@ void add_history(List *list, char *str){
 
   }else{
 
-    Item *temp_list = list->root;
+
     while(temp_list->next != NULL){//just to count and traverse the nodes that we have in the list.
       temp_list = temp_list->next;
       node_pos++;
