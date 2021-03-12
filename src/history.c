@@ -82,7 +82,7 @@ char *get_history(List *list, int id){
     if(temp_list->id == id){//if the id in our current position is the same as the id we want then we return the str in that position.
       return temp_list->str;
     }
-    temp = temp->next;
+    temp_list = temp->next;
   }
 
   return NULL; //return NULL if the id doesn't exist.
