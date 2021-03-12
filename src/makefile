@@ -10,4 +10,6 @@ gui.o: gui.c tokenizer.h history.h history.c
 history.o: history.c history.h
 	gcc -c history.c
 
+clean:
+	rm -f *.o *~ *#
 
