@@ -2,20 +2,22 @@
 #include <stdlib.h>
 #include "history.h"
 
+
 //int main(){
-//List *list = init_history();
-//add_history(list, "hello");
-//add_history(list, "world");
-//add_history(list, "are you good");
- //print_history(list);
+  //List *list = init_history();
 
-//char *hist = get_history(list, 1);
-//printf("the word is: %s\n",hist);
+  //add_history(list, "hello");
+  //add_history(list, "world");
+  //add_history(list, "are you good");
 
-//free_history(list);
-//printf("the list is: %s\n",list);
+  //print_history(list);
+
+  //char *hist = get_history(list, 1);
+  //printf("the word is: %s\n", hist);
+
+  //free_history(list);
+  //printf("the list is: %s\n", list); 
 //}//end main
-
 
 List *init_history(){
   List *list = NULL;

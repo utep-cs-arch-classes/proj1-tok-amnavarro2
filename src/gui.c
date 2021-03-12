@@ -56,13 +56,16 @@ int main(){
 
   last_word = word_end(ptr2);
   printf("The last word is: %c\n", last_word);
-  // amount_words = count_words(ptr);
-  // printf("%d\n", amount_words);
+  amount_words = count_words(ptr);
+  printf("%d\n", amount_words);
 
   copy = copy_str(ptr2,2);
   printf("The copy string is: %s\n", copy);
+  
+  //tokens = tokenize(ptr2);
   tokenize(ptr2);
-
+  //free_tokens(tokens);
+  //printf("the tokens are: %s\n", tokens);
   //history calls
   List *LL = init_history();
 
@@ -231,9 +234,7 @@ char **tokenize(char *str){
     
 
 
-
-
-    
+  
     if(*(str+i+1) == '\0'){//this if statement will tokenize once it finds that the next postition is a null space.
       
       pos = i -length;// get the starting position of the index after the current space

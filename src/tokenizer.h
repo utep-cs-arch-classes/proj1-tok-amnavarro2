@@ -17,7 +17,6 @@ int non_space_char(char c);
    str does not contain any words.
    str is assumed to be pointing to a space character */
 char *word_start(char *str);
-
 /* Returns a pointer terminator to the first space character or string-terminator
    following str in a zero terminated string.
    str is assumed to be pointing to a non-space character*/
