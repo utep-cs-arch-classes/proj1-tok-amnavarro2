@@ -12,6 +12,7 @@ int find_space(char *ptr);
 int word_start_index(char *ptr);
 int word_end_index(char *ptr);
 
+
 int main(){
   char c;
   char str[LIMIT];
@@ -24,12 +25,14 @@ int main(){
   int is_non_space = 0;
   int i = 0;
   int j = 0;
-  int amount_words = 0;
-
+  int amount_words =0;
+  int go = 1;
+  char in;
   
+  //while(go){
   printf("ENTER YOUR INPUT: \n");
   char *inStr = (char *)malloc(LIMIT);
-  
+
   while((c = getchar()) !='\n'){
     putchar(c);
     
@@ -46,7 +49,7 @@ int main(){
   
   *(inStr +99) = '\0';
   str[i]='\0';
-  printf("YOUR INPUT IS: %s\n",str);//print out the input as a string of characters.
+  printf("YOUR INPUT IS: %s\n\n",str);//print out the input as a string of characters.
 
   // char *ptr = str;
   char *ptr2 =inStr;
@@ -55,17 +58,18 @@ int main(){
   printf("The first word is: %c\n",first_word);
 
   last_word = word_end(ptr2);
-  printf("The last word is: %c\n", last_word);
-  amount_words = count_words(ptr);
-  printf("%d\n", amount_words);
+  printf("The last word is: %c\n\n", last_word);
+  amount_words = count_words(ptr2);
+  printf("The amount of words is: %d\n\n", amount_words);
 
   copy = copy_str(ptr2,2);
-  printf("The copy string is: %s\n", copy);
+  printf("The copy string is: %s\n\n", copy);
   
   //tokens = tokenize(ptr2);
   tokenize(ptr2);
   //free_tokens(tokens);
   //printf("the tokens are: %s\n", tokens);
+
   //history calls
   List *LL = init_history();
 
@@ -77,8 +81,16 @@ int main(){
 
   free_history(LL);
   printf("the list is now: %s\n", LL);
+
+  //printf("enter n to exit \n");
+  //in = getchar();
+
+  //if(in == 'n'){
+  //go = 0;
+  //}
   
-}//end main
+  //}//end while
+  }//end main
 
 
 
