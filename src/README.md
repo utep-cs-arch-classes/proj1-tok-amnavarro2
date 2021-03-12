@@ -11,7 +11,7 @@ To learn about text formatting using markdown, we encourage you to examine
  - [../README.md](../README.md)
  - the online [Markdown Guide](https://www.markdownguide.org/).
 
-#Main
+# Main
 
 In the main method of my gui.c file I will be declaring all the variables such
 as int, char *, char**, and some additional arrays which were used for testing
