@@ -3,21 +3,21 @@
 #include "history.h"
 
 
-//int main(){
-  //List *list = init_history();
+int main(){
+List *list = init_history();
 
-  //add_history(list, "hello");
-  //add_history(list, "world");
-  //add_history(list, "are you good");
+add_history(list, "hello");
+add_history(list, "world");
+add_history(list, "are you good");
 
-  //print_history(list);
+print_history(list);
 
   //char *hist = get_history(list, 1);
   //printf("the word is: %s\n", hist);
 
   //free_history(list);
   //printf("the list is: %s\n", list); 
-//}//end main
+}//end main
 
 List *init_history(){
   List *list = NULL;
@@ -42,26 +42,26 @@ void add_history(List *list, char *str){
   //NEED THIS STATEMENT IF NOT THE ZERO NODE WILL NOT BE POPULATED!!!
   if(temp_list->id == 0){ //if we have nothing in our list then we populate the first node
     
-    temp_list->id = node_pos;
     temp_list->str = str;
+    temp_list->id = node_pos;
     return; //need to return the root cause if not we will repeat the root twice in our output. Also we exit since we successfully added the first item.
 
-  }//end if
-  
+  }else{
+    
+    while(temp_list->next != NULL){//just to count and traverse the nodes that we have in the list.
+      temp_list = temp_list->next;
+      node_pos++;
+    }//end while
 
-while(temp_list->next != NULL){//just to count and traverse the nodes that we have in the list.
-    temp_list = temp_list->next;
-    node_pos++;
-  }//end while
-
- node_pos = node_pos + 1;// identify the next position in our list
+    node_pos = node_pos + 1;// identify the next position in our list
   
-  temp_list->next = malloc(sizeof(Item));//allocate memory for the next node in the list.
-
-  temp_list->next->str=str; //add the next str in the next node.
-  temp_list->next->id = node_pos;//add the next value of id.
-  temp_list->next->next = NULL;//make the next-next node null, but in this case it would be the last position.
+    temp_list->next = malloc(sizeof(Item));//allocate memory for the next node in the list.
+    
+    temp_list->next->str=str; //add the next str in the next node.
+    temp_list->next->id = node_pos;//add the next value of id.
+    temp_list->next->next = NULL;//make the next-next node null, but in this case it would be the last position.
   
+    }//end if
 }//end add_history
 
 
