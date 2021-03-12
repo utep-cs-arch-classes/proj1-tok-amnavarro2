@@ -36,50 +36,51 @@ List *init_history(){
 }//end init_history
 
 void add_history(List *list, char *str){
-  Item *temp = list->root; //making a copy of of current item in the root so we don't lose it
-  int count = 1;
+  Item *temp_list = list->root; //making a copy of of current item in the root so we don't lose it
+  int node_pos = 1;
 
   //NEED THIS STATEMENT IF NOT THE ZERO NODE WILL NOT BE POPULATED!!!
-  if(temp->id == 0){ //if we have nothing in our list then we populate the first node
+  if(temp_list->id == 0){ //if we have nothing in our list then we populate the first node
     
-    temp->id = count;
-    temp-> str = str;
+    temp_list->id = node_pos;
+    temp_list->str = str;
     return; //need to return the root cause if not we will repeat the root twice in our output.
 
   }//end if
   
-  while(temp->next != NULL){//just to count and traverse the nodes that we have in the list.
-    temp = temp->next;
-    count++;
+  while(temp_list->next != NULL){//just to count and traverse the nodes that we have in the list.
+    temp_list = temp_list->next;
+    node_pos++;
   }//end while
 
-  count = count + 1;
+  node_pos = node_pos + 1;
   
-  temp->next = malloc(sizeof(Item));//allocate memory for the next node in the list.
+  temp_list->next = malloc(sizeof(Item));//allocate memory for the next node in the list.
 
-  temp->next->str=str; //indicate the next str in the next node.
-  temp->next->id = count;//indicate the next value of id.
-  temp->next->next = NULL;//make the next-next node null, but in this case it would be the last position.
+  temp_list->next->str=str; //indicate the next str in the next node.
+  temp_list->next->id = node_pos;//indicate the next value of id.
+  temp_list->next->next = NULL;//make the next-next node null, but in this case it would be the last position.
+  
 }//end add_history
 
 
 void print_history(List *list){
-  Item *temp = list->root;//keep our head safe
+  Item *temp_list = list->root;//keep our head safe
   
-  while(temp != NULL){
-    printf("the id is: %d and the word is: %s \n", temp->id, temp->str);
-    temp = temp->next;// point to the next item in our list
+  while(temp_list != NULL){
+    printf("the id is: %d and the word is: %s \n", temp_list->id, temp_list->str);
+    temp_list = temp_list->next;// point to the next item in our list
     
   }//end while
   
 }//end print_history
 
 char *get_history(List *list, int id){
-  Item *temp = list->root;
+  Item *temp_list = list->root;
 
-  while(temp != NULL){
-    if(temp->id == id){//if the id in our current position is the same as the id we want then we return the str in that position.
-      return temp->str;
+  while(temp_list != NULL){
+    if(temp_list->id == id){//if the id in our current position is the same as the id we want then we return the str in that position.
+      return temp_list->str;
     }
     temp = temp->next;
   }
