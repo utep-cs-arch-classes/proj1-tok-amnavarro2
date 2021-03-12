@@ -84,13 +84,48 @@ helper methods which are...
 - word_end_index
 - find_space_index
 - copy_str
+- count_words
 
 To begin, in this method im supposed to return a double pointer which will
 tokenize the single pointer. which the output if we used "hello world" should
 return...
 
-tokens[0] = "hello"
-tokens[1] = "world"
+- tokens[0] = "hello"
+- tokens[1] = "world"
+
+So in my program there were many ways I went about it until I found the best
+way for me. So what I did was that I needed to first allocate new memory for
+the double pointer by using the count_words method to get the current size of
+the single pointer. Also to be safe I copied the entire single pointer into
+another to not lose it in such a big and complex method.
+
+After thats done, now its time to tokenize, so to do this first we traverse
+the single pointer and if we find a space char then we would do this. we would
+get the integer value of where the first char is at by using word_start_index
+(does the same process as word_start but returns the int position of the
+index), then we will get the integer value where the space was found by using
+find_space. Now we do some simple math to determine the length of our word
+which that length would be passed into the copy_str method along with the
+single pointer.
+
+When we copy the string then we would containe it in another single pointer,
+which we would later use a count to work as the individual index for our
+double pointer. When using the double pointer at the current count we will
+store the copy ptr we had and then increase our count(index).
+
+Now we need the rest of the strings, so to do thhis if we reach the next index
+that is '\0' then we will do more calculations. So to start I need to get the
+position of the current so we subtract the index by the length and then find
+the position of the last char using word_end_index. We then update the length
+by subtracting both values and send the length to the copy_str along with the
+index we want to start in our pointer. After we do the same as before and
+store the copy in the double pointer.
+
+# free_tokens:
+
+For this piece of code, I needed to free all the tokens allocated in the
+double pointer. so what I did was essentially use the free command which will
+de-allocate all of our tokens making it unuseable for the future.
 
 
 
