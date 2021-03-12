@@ -72,7 +72,7 @@ int main(){
   char *hist = get_history(LL, 1);
   printf("the word is: %s\n", hist);
 
-  free_list(LL);
+  free_history(LL);
   printf("the list is now: %s\n", LL);
   
 }//end main
